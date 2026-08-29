@@ -1,6 +1,6 @@
 // ⚠️ REQUIRED: paste your deployed Apps Script Web App URL here.
 // Deploy > New deployment > Web app > Execute as Me / Access: Anyone.
-const API_URL = 'https://script.google.com/macros/s/AKfycbwgEP00b54CqaNzszzZ-DrG-FHkapL9kfqe3zzWgAm6ZDlnSSl1z8j8WWXiHbDmtLOjJg/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyk_KTAIpR0Ql6tFolTY2f5ZkStuhPlLMbGNJ7vfffWis4_DcF5wMR4X0FbkMnfdaV5Gw/exec';
 
 const Session = {
   get token() { return localStorage.getItem('ka_token') || ''; },
