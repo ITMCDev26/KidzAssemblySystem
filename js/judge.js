@@ -123,19 +123,29 @@ async function saveAll(categoryId, criteria) {
   const btn = document.getElementById('saveAllBtn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Saving…';
-  const inputs = document.querySelectorAll('#scoreTable .score-input');
-  let errors = [];
-  for (const inp of inputs) {
-    if (inp.value === '') continue;
-    const res = await apiCall('saveScore', {
-      categoryId, participantId: inp.dataset.pid, criteriaId: inp.dataset.cid, score: inp.value
-    });
-    if (!res.ok) errors.push(res.error);
+
+  // Collect every filled-in box into ONE request instead of one request per
+  // cell — this is what makes saving fast even when many judges hit "Save"
+  // at the same time.
+  const items = [];
+  document.querySelectorAll('#scoreTable .score-input').forEach(inp => {
+    if (inp.value !== '') {
+      items.push({ participantId: inp.dataset.pid, criteriaId: inp.dataset.cid, score: inp.value });
+    }
+  });
+
+  if (!items.length) {
+    btn.disabled = false;
+    btn.innerHTML = '💾 Save Scores';
+    return;
   }
+
+  const res = await apiCall('saveScoresBatch', { categoryId, items });
   btn.disabled = false;
-  btn.innerHTML = '💾 Save Scores';
-  if (errors.length) alert('Some scores did not save:\n' + errors.join('\n'));
-  else {
+  if (!res.ok) {
+    btn.innerHTML = '💾 Save Scores';
+    alert('Scores did not save: ' + res.error);
+  } else {
     btn.textContent = '✓ Saved!';
     setTimeout(() => { btn.textContent = '💾 Save Scores'; }, 1500);
   }
