@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — KIDZ Assembly '26</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="bunting" id="bunting"></div>
+<div class="topbar">
+  <div class="brand">
+    <div class="logo-badge">⭐</div>
+    <div class="brand-text">KIDZ ASSEMBLY <b>'26</b> — Admin</div>
+  </div>
+  <div class="actions">
+    <span class="who" id="whoami"></span>
+    <button class="btn-outline btn-sm" id="logoutBtn">Log Out</button>
+  </div>
+</div>
+
+<div class="page">
+  <div class="tabbar" id="tabbar">
+    <button data-tab="categories" class="active">📋 Categories</button>
+    <button data-tab="criteria">📐 Criteria</button>
+    <button data-tab="participants">🧒 Participants</button>
+    <button data-tab="judges">🧑‍⚖️ Judges</button>
+    <button data-tab="summary">📊 Live Summary</button>
+    <button data-tab="results">🏆 Results</button>
+  </div>
+  <div id="tabContent"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
